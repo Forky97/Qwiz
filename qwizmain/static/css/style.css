@@ -21,6 +21,12 @@ body {
 
 
 
+.form-signin {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+
 
 
 .welcome-text {
@@ -54,3 +60,8 @@ body {
   background-color: #32CD32;
 }
 
+
+.messages {
+  padding-top:30px;
+  color: white;
+}
