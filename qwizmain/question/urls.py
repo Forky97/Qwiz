@@ -1,11 +1,11 @@
 from django.urls import path
-import views
+from . import views
 
 
 
 urlpatterns = [
 
-    path('home/',views.BaseHelloView.as_view,name='home')
+    path('',views.BaseHelloView.as_view(),name='home')
 
 
 ]
