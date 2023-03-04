@@ -79,5 +79,13 @@ class SignUpForm(forms.Form):
         return auth
 
 
-
-
+class ContactForm(forms.Form):
+    topic = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={"id":"theme",
+                                                                                       "placeholder":"Тема",
+                                                                                       "class":"form-control"}))
+    text = forms.CharField(max_length=100, required=True, widget=forms.Textarea(attrs={"id": "theme",
+                                                                                         "placeholder": "таше сообщение",
+                                                                                         "class": "form-control"}))
+    your_email = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={"id": "theme",
+                                                                                         "placeholder": "ваша почта",
+                                                                                         "class": "form-control"}))

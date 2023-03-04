@@ -1,5 +1,5 @@
 from .models import Question
-
+from django.contrib.auth.models import User
 from celery import shared_task
 
 
@@ -13,4 +13,10 @@ def file_write():
 @shared_task
 def count_widgets():
     return Question.objects.count()
+
+
+@shared_task
+def top_users():
+    top_users = User.objects.order_by('-raiting')[:10]
+
 

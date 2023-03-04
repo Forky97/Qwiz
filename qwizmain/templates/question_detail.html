@@ -4,20 +4,40 @@
 {% block title %} Главная Страница  {% endblock %}
 
 {% block content %}
+<div>
 
-<form method="post">
-  {% csrf_token %}
-  <h3>{{ question.question }}</h3>
-  <input type="radio" id="answer1" name="answer" value="1{{question.correct}}">
-  <label for="answer1">{{ question.a1 }}</label><br>
-  <input type="radio" id="answer2" name="answer" value="2{{question.correct}}">
-  <label for="answer2">{{ question.a2 }}</label><br>
-  <input type="radio" id="answer3" name="answer" value="3{{question.correct}}">
-  <label for="answer3">{{ question.a3 }}</label><br>
-  <input type="radio" id="answer4" name="answer" value="4{{question.correct}}">
-  <label for="answer4">{{ question.a4}}</label><br>
-  <button id="post_value" type="submit">Отправить</button>
-</form>
+  <form method="post">
+    {% csrf_token %}
+    <h3>{{ question.question }}</h3>
+    <input type="radio" id="answer1" name="answer" value="1{{question.correct}}">
+    <label for="answer1">{{ question.a1 }}</label><br>
+    <input type="radio" id="answer2" name="answer" value="2{{question.correct}}">
+    <label for="answer2">{{ question.a2 }}</label><br>
+    <input type="radio" id="answer3" name="answer" value="3{{question.correct}}">
+    <label for="answer3">{{ question.a3 }}</label><br>
+    <input type="radio" id="answer4" name="answer" value="4{{question.correct}}">
+    <label for="answer4">{{ question.a4}}</label><br>
+    <button id="post_value" type="submit">Отправить</button>
+  </form>
+
+  <div>
+    {% if message %}
+    <h2 class="text-light">    {{message}}   </h2>
+    {% else %}
+    <h2 class="text-light">   Вы ответили неправильно   </h2>
+    {% endif %}
+  </div>
+
+
+    <ol>
+      {% for user in top_users %}
+        <li>{{ user.username }} - {{ user.rating }}</li>
+      {% endfor %}
+    </ol>
+
+
+</div>
+
 
 
 

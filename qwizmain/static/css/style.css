@@ -17,14 +17,14 @@ body {
   background-image: url("https://images.ctfassets.net/usf1vwtuqyxm/5cr4lVBZ2k1il5kgkj0op8/68fcc40c97192a3dbaaa20ea5153c7bf/Quizzes-Hub-Copy-compressor.png?fm=jpg&q=70&w=2560");
   background-repeat: no-repeat;
   background-size: cover;
-  color:white;
 }
 
 
 
 
 
-
+label {color:white}
+h3 {color:white}
 
 
 
@@ -53,20 +53,6 @@ body {
   margin-bottom: 40px;
 }
 
-.start-button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 20px;
-  color: #fff;
-  background-color: #007bff;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-}
-
-.start-button:hover {
-  background-color: #32CD32;
-}
 
 
 .messages {
@@ -78,6 +64,11 @@ body {
 form {
 margin-top: 50px;
 margin-left: 50px}
+
+
+#contact_form {
+width:80%;
+padding-left:80px;
 
 
 
@@ -127,3 +118,26 @@ margin-left: 50px}
  input[type="radio"] {
   transform: scale(1.5);
 }
+
+.start-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.start-button:hover {
+  background-color: #32CD32;
+}
+
+
+
+
+
+
+
+

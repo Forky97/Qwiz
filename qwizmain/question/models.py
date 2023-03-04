@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
 
 
 
@@ -21,6 +24,19 @@ class Question (models.Model):
 
     def __str__(self):
         return f'Вопрос {self.id} про {self.question}'
+
+class CustomUser (models.Model):
+
+    custom_user  = models.OneToOneField(User,on_delete=models.CASCADE)
+    raiting = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'{self.custom_user} : {self.raiting}'
+
+    class Meta:
+        ordering = ['raiting']
+
+
 
 
 
