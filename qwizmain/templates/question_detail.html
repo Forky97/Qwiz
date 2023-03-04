@@ -28,15 +28,37 @@
     {% endif %}
   </div>
 
-
-    <ol>
-      {% for user in top_users %}
-        <li>{{ user.username }} - {{ user.rating }}</li>
-      {% endfor %}
-    </ol>
-
-
 </div>
+
+
+
+<div class="container text-light">
+  <div class="main-content">
+  </div>
+  <div class="rating-block">
+    <h3>Рейтинг персонажа</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td>Имя:</td>
+          <td>{{user.custom_user}}</td>
+        </tr>
+        <tr>
+          <td >Рейтинг:</td>
+          <td>{{user.raiting}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
 
 
 

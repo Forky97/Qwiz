@@ -150,4 +150,12 @@ CELERY_CACHE_BACKEND = 'default'
 
 
 
+## Настройка почты !!!!!!!!
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'inginerii.biomedicale@gmail.com' #
+EMAIL_HOST_PASSWORD = 'brejiquyyjuhwovl'
+
 

@@ -7,12 +7,9 @@ from django.contrib import messages
 from .models import Question,CustomUser
 from random import randint as ri
 from django.core.mail import send_mail
-from django.contrib.auth.models import User
-
-
-
-
-
+from django.views.generic.base import RedirectView
+from django.urls import reverse
+from .tasks import send_mail_task
 
 
 
@@ -83,32 +80,40 @@ class QuestionDetailView(View):
 
         count = Question.objects.count()
         question  = Question.objects.get(id=ri(1,count))
+        CustomUserRaiting = CustomUser.objects.get(id=request.user.id)
+
 
 
         return render(request,'question_detail.html',context={'question':question,
-                                                              'message':message,})
+                                                              'message':message,
+                                                              'user':CustomUserRaiting})
 
 
 
     def post(self,request):
 
         answer = request.POST.get('answer')
-        print(answer)
         count = Question.objects.count()
         question = Question.objects.get(id=ri(1, count))
+        CustomUserRaiting = CustomUser.objects.get(id=request.user.id)
+
 
 
         if answer[0]==answer[1]:
             message = 'Вы ответили правильно'
+            CustomUserRaiting.raiting +=1
+            CustomUserRaiting.save()
 
 
             return render(request, 'question_detail.html',context={'question':question,
-                                                                   'message':message})
+                                                                   'message':message,
+                                                                   'user':CustomUserRaiting,})
 
         else:
             message = None
             return render(request, 'question_detail.html', context={'question': question,
-                                                                    'message':message,})
+                                                                    'message':message,
+                                                                    'user':CustomUserRaiting,})
 
 
 
@@ -129,15 +134,28 @@ class ContactView(View):
 
 
     def post(self,request):
-        ...
+        recieve_form = ContactForm(request.POST)
+        if recieve_form.is_valid():
+            subject = recieve_form.data.get('topic')
+            message = recieve_form.data.get('text')
+            email_from = recieve_form.data.get('your_email')
+            recipient_list =['inginerii.biomedicale@gmail.com']
 
-    # from django.core.mail import send_mail
-    #
-    # # Определение параметров отправки электронной почты
-    # subject = 'Тема письма'
-    # message = 'Текст письма.'
-    # email_from = 'от кого'
-    # recipient_list = ['адрес1@mail.ru', 'адрес2@mail.ru']
-    #
-    # # Отправка электронной почты
-    # send_mail(subject, message, email_from, recipient_list)
+            send_mail_task.delay(subject, message, email_from, recipient_list)
+
+            return HttpResponseRedirect(reverse('success'))
+
+
+        return render(request, 'contact.html', context={'form': recieve_form,
+                                                            })
+
+
+
+
+
+def Success(request):
+    return render(request,'success.html')
+
+
+
+

@@ -16,25 +16,18 @@
   {% if user.is_authenticated %}
   <a href="{% url 'game' %}" class="start-button">Start</a>
   {% else %}
-    <a href="{% url 'signin' %}" class="start-button">SignIn</a> or
-    <a href="" class="start-button">SignUp</a>
+    <a href="{% url 'signin' %}" class="start-button green-button">SignIn</a> or
+    <a href="" class="start-button green-button">SignUp</a>
   {% endif %}
-
-
 </div>
 
 
-<div id="support">
-		<span class="close" onclick="document.getElementById('support').style.display='none'">&times;</span>
+<div id="support_appear" class="text-light">
 		<p>Служба технической поддержки</p>
 		<p>Телефон: 8-800-555-55-55</p>
 		<p>Email: support@example.com</p>
 	</div>
-	<script>
-		setTimeout(function() {
-			document.getElementById("support").style.display = "block";
-		}, 3000);
-	</script>
+
 
 
 {% endblock %}

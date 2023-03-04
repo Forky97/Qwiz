@@ -1,6 +1,7 @@
 from .models import Question
 from django.contrib.auth.models import User
 from celery import shared_task
+from django.core.mail import send_mail
 
 
 
@@ -11,8 +12,8 @@ def file_write():
         f.write(f'task complete\n')
 
 @shared_task
-def count_widgets():
-    return Question.objects.count()
+def send_mail_task(subject, message, email_from, recipient_list):
+    send_mail(subject,message,email_from,recipient_list)
 
 
 @shared_task
