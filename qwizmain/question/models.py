@@ -13,11 +13,14 @@ class Question (models.Model):
                    ]
 
     question = models.CharField(max_length=500)
-    a1=models.CharField(max_length=300,verbose_name='ответ_1')
+    a1 = models.CharField(max_length=300,verbose_name='ответ_1')
     a2 = models.CharField(max_length=300,verbose_name='ответ_2')
     a3 = models.CharField(max_length=300,verbose_name='ответ_3')
     a4 = models.CharField(max_length=300,verbose_name='ответ_4')
     correct = models.CharField(choices=choices_var,max_length=10)
+
+    def __str__(self):
+        return f'Вопрос {self.id} про {self.question}'
 
 
 
