@@ -14,15 +14,27 @@
   <p>Test your knowledge with our fun and challenging quizzes. Choose from a variety of topics, and see how you stack up against other players.
   To continue please login</p>
   {% if user.is_authenticated %}
-  <a href="" class="start-button">Start</a>
+  <a href="{% url 'game' %}" class="start-button">Start</a>
   {% else %}
     <a href="{% url 'signin' %}" class="start-button">SignIn</a> or
     <a href="" class="start-button">SignUp</a>
   {% endif %}
 
 
-
 </div>
+
+
+<div id="support">
+		<span class="close" onclick="document.getElementById('support').style.display='none'">&times;</span>
+		<p>Служба технической поддержки</p>
+		<p>Телефон: 8-800-555-55-55</p>
+		<p>Email: support@example.com</p>
+	</div>
+	<script>
+		setTimeout(function() {
+			document.getElementById("support").style.display = "block";
+		}, 3000);
+	</script>
 
 
 {% endblock %}

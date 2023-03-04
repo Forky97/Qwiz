@@ -4,6 +4,8 @@ from .forms import SignInForm,SignUpForm
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from .models import Question
+from random import randint as ri
 
 
 
@@ -64,4 +66,31 @@ class SignUpView(View):
 
 
 
+class QuestionDetailView(View):
 
+    def get(self,request):
+        count = Question.objects.count()
+        question  = Question.objects.get(id=ri(1,count))
+
+
+        return render(request,'question_detail.html',context={'question':question})
+
+
+
+    def post(self,request):
+        ...
+
+
+
+
+
+class ContactView(View):
+
+    def get(self,request):
+        ...
+
+
+
+
+    def post(self,request):
+        ...
