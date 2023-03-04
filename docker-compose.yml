@@ -1,0 +1,34 @@
+services:
+  web_app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./qwizmain:/qwizmain
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+
+
+
+
+  redis:
+    image: redis:7.0.5-alpine
+    hostname: redis
+
+
+
+
+  worker:
+    build:
+      context: .
+    hostname: worker
+    volumes:
+      - ./qwizmain:/qwizmain
+    entrypoint: celery
+    command: >
+      -A qwizmain worker -l info
+    links:
+      - redis
+    depends_on:
+      - redis

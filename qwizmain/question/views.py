@@ -80,7 +80,8 @@ class QuestionDetailView(View):
 
         count = Question.objects.count()
         question  = Question.objects.get(id=ri(1,count))
-        CustomUserRaiting = CustomUser.objects.get(id=request.user.id)
+
+        CustomUserRaiting = CustomUser.objects.get(custom_user=request.user)
 
 
 
@@ -95,7 +96,7 @@ class QuestionDetailView(View):
         answer = request.POST.get('answer')
         count = Question.objects.count()
         question = Question.objects.get(id=ri(1, count))
-        CustomUserRaiting = CustomUser.objects.get(id=request.user.id)
+        CustomUserRaiting = CustomUser.objects.get(custom_user=request.user)
 
 
 
