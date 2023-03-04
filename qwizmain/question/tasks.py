@@ -1,7 +1,10 @@
 from .models import Question
-from django.contrib.auth.models import User
+from .models import CustomUser
 from celery import shared_task
 from django.core.mail import send_mail
+from django.db.models import F
+from .serializers import CumstomUserSerializer
+
 
 
 
@@ -18,6 +21,7 @@ def send_mail_task(subject, message, email_from, recipient_list):
 
 @shared_task
 def top_users():
-    top_users = User.objects.order_by('-raiting')[:10]
+    top_users = CustomUser.objects.order_by(F('raiting').desc(nulls_last=True)).values('custom_user__username', 'raiting')[:10]
+    print(top_users)
 
 

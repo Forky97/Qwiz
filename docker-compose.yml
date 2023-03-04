@@ -6,8 +6,7 @@ services:
       - "8000:8000"
     volumes:
       - ./qwizmain:/qwizmain
-    command: >
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+    command: python manage.py runserver 0.0.0.0:8000
 
 
 
@@ -28,6 +27,20 @@ services:
     entrypoint: celery
     command: >
       -A qwizmain worker -l info
+    links:
+      - redis
+    depends_on:
+      - redis
+
+
+  celery_beat:
+    build:
+      context: .
+    hostname: beat
+    volumes:
+      - ./qwizmain:/qwizmain
+    entrypoint: celery
+    command: -A qwizmain beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
     links:
       - redis
     depends_on:
