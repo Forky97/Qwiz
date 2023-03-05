@@ -87,7 +87,7 @@ class QuestionDetailView(View):
 
         return render(request,'question_detail.html',context={'question':question,
                                                               'message':message,
-                                                              'user':CustomUserRaiting})
+                                                              'custom_user':CustomUserRaiting})
 
 
 
@@ -108,13 +108,13 @@ class QuestionDetailView(View):
 
             return render(request, 'question_detail.html',context={'question':question,
                                                                    'message':message,
-                                                                   'user':CustomUserRaiting,})
+                                                                   'custom_user':CustomUserRaiting,})
 
         else:
             message = None
             return render(request, 'question_detail.html', context={'question': question,
                                                                     'message':message,
-                                                                    'user':CustomUserRaiting,})
+                                                                    'custom_user':CustomUserRaiting,})
 
 
 

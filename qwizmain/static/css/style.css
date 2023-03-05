@@ -13,6 +13,7 @@ footer p {
   line-height: 40px;
 }
 
+
 body {
   background-image: url("https://images.ctfassets.net/usf1vwtuqyxm/5cr4lVBZ2k1il5kgkj0op8/68fcc40c97192a3dbaaa20ea5153c7bf/Quizzes-Hub-Copy-compressor.png?fm=jpg&q=70&w=2560");
   background-repeat: no-repeat;
@@ -61,14 +62,8 @@ h3 {color:white}
 }
 
 
-form {
-margin-top: 50px;
-margin-left: 50px}
 
 
-#contact_form {
-width:80%;
-padding-left:80px;
 
 
 #support_appear {
@@ -126,34 +121,6 @@ padding-left:80px;
 
 
 
-
-.start-button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  background-color: #007bff;
-  transition: all 0.3s ease-in-out;
-}
-
-.green-button {
-  background-color: #4CAF50;
-}
-
-.start-button:hover, .start-button:focus {
-  background-color: #28a745;
-  transform: translateY(-5px);
-}
-
-
-
-
-
 .container {
   display: flex;
   flex-direction: row;
@@ -168,4 +135,51 @@ padding-left:80px;
   margin-left: 20px;
 }
 
+
+
+
+
+.start-button {
+  /* добавление стилей */
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  /* добавление анимации */
+  transition: all 0.2s ease-in-out;
+}
+
+/* добавление класса hover-green для изменения цвета при наведении */
+.hover-green:hover {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+/* добавление класса jump для добавления анимации подпрыгивания */
+.jump {
+  animation: jump 1s;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+
+.question_detail_form {
+
+margin-left:40px;
+margin-top:40px;
+
+}
 

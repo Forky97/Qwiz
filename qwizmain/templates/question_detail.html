@@ -6,7 +6,7 @@
 {% block content %}
 <div>
 
-  <form method="post">
+  <form method="post" class="question_detail_form">
     {% csrf_token %}
     <h3>{{ question.question }}</h3>
     <input type="radio" id="answer1" name="answer" value="1{{question.correct}}">
@@ -41,11 +41,11 @@
       <tbody>
         <tr>
           <td>Имя:</td>
-          <td>{{user.custom_user}}</td>
+          <td>{{custom_user.custom_user}}</td>
         </tr>
         <tr>
           <td >Рейтинг:</td>
-          <td>{{user.raiting}}</td>
+          <td>{{custom_user.raiting}}</td>
         </tr>
       </tbody>
     </table>
