@@ -1,5 +1,7 @@
 from django.test import TestCase
 from .models import Question,CustomUser
+from django.contrib.auth.models import User
+from django.db import models
 
 
 
@@ -14,6 +16,18 @@ class QuestionModelTest(TestCase):
             a3='1300',
             a4='1400',
             correct='1'
+        )
+
+        user = User.objects.create_user(
+            username='dima',
+            email='dima@mail.ru',
+            password='demo'
+
+        )
+
+
+        CustomUser.objects.create(
+            custom_user = user,
         )
 
     def test_question_content(self):
@@ -42,6 +56,16 @@ class QuestionModelTest(TestCase):
         question = Question.objects.get(id=1)
         self.assertEqual(str(question), f'Вопрос {question.id} про {question.question}')
 
-    def test_custom_user_correct(self):
-        all_id = CustomUser.objects.get(id=1)
-        self.assertEqual(str(all_id),f'admin : 15')
+    # def test_custom_user_correct(self):
+    #     all_id = CustomUser.objects.get(id=1)
+    #     self.assertEqual(str(all_id),f'admin : 15')
+
+
+    def test_user_corect(self):
+        user = User.objects.get(id=1)
+        self.assertEqual(user.username,'dima')
+
+    def test_custom_user_corect_raiting(self):
+        custom_user = CustomUser.objects.get(id=1)
+        self.assertEqual(custom_user.raiting,0)
+
