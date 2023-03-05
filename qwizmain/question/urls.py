@@ -14,5 +14,6 @@ urlpatterns = [
     path('signup/',views.SignUpView.as_view(),name='signup'),
     path('contact/success',views.Success,name='success'),
     path('signout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='signout', ),
+    path('game/top10',views.Top10.as_view(),name='top10'),
 
 ]

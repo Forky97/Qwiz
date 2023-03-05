@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+   {% block title %}  Рейтинг персонажей {% endblock %}
+
+
+
+{% block content %}
+<div class="text-light top-users">
+  <h1 class="top-users-heading">Top 10 Users</h1>
+  <table class="top-users-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in top_users %}
+        <tr>
+          <td class="top-users-name">{{ user.custom_user}}</td>
+          <td class="top-users-rating">{{ user.raiting }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+
+
+
+

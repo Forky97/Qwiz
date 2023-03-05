@@ -22,7 +22,7 @@
 </div>
 
 
-<div id="support_appear" class="text-light">
+<div id="support_appear" class="text-light" style="display: none;">
 		<p>Служба технической поддержки</p>
 		<p>Телефон: 8-800-555-55-55</p>
 		<p>Email: support@example.com</p>
@@ -30,4 +30,13 @@
 
 
 
+<script>
+    <script>
+    setTimeout(function() {
+        document.getElementById('support_appear').style.display = 'block';
+    }, 2000);
+</script>
+
+
+</script>
 {% endblock %}
