@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block title %} Qwiz-игра  {% endblock %}
@@ -18,9 +19,8 @@
     <input type="radio" id="answer4" name="answer" value="4{{question.correct}}">
     <label for="answer4">{{ question.a4}}</label><br>
     <button id="post_value" type="submit">Отправить</button>
-  </form>
 
-  <div>
+     <div id="start_message">
     {% if message %}
     <h2 class="text-light">    {{message}}   </h2>
     {% else %}
@@ -28,7 +28,8 @@
     {% endif %}
   </div>
 
-</div>
+  </form>
+
 
 
 
@@ -53,14 +54,30 @@
 </div>
 
 
+<script>
+const form = document.querySelector('.question_detail_form');
+
+form.addEventListener('submit', function(event) {
+  const answers = form.querySelectorAll('input[name="answer"]');
+  let answerChecked = false;
+
+  // Проверяем, выбран ли хотя бы один вариант ответа
+  for (let i = 0; i < answers.length; i++) {
+    if (answers[i].checked) {
+      answerChecked = true;
+      break;
+    }
+  }
+
+  // Если ни один вариант ответа не выбран, отменяем отправку формы и выводим сообщение об ошибке
+  if (!answerChecked) {
+    event.preventDefault();
+    alert('Пожалуйста, выбери один из вариантов ответа');
+  }
+});
 
 
-
-
-
-
-
-
+</script>
 
 
 {% endblock %}

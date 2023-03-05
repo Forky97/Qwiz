@@ -10,6 +10,7 @@ from django.core.mail import send_mail
 from django.views.generic.base import RedirectView
 from django.urls import reverse
 from .tasks import send_mail_task
+from django.http import HttpResponse
 
 
 
@@ -98,7 +99,6 @@ class QuestionDetailView(View):
         CustomUserRaiting = CustomUser.objects.get(custom_user=request.user)
 
 
-
         if answer[0]==answer[1]:
             message = 'Вы ответили правильно'
             CustomUserRaiting.raiting +=1
@@ -114,7 +114,6 @@ class QuestionDetailView(View):
             return render(request, 'question_detail.html', context={'question': question,
                                                                     'message':message,
                                                                     'custom_user':CustomUserRaiting,})
-
 
 
 
@@ -150,11 +149,21 @@ class ContactView(View):
                                                             })
 
 
+class Top10(View):
+    def get(self,request):
+        top_users = CustomUser.objects.order_by('-raiting')[:10]
+        print(top_users)
+
+        return render(request,'rating.html',context={'top_users':top_users})
+
+
+
 
 
 
 def Success(request):
     return render(request,'success.html')
+
 
 
 
