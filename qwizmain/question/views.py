@@ -78,8 +78,8 @@ class QuestionDetailView(View):
     def get(self,request):
         message = 'Выберите пожалуйства правильный ответ '
 
-        count = Question.objects.count()
-        question  = Question.objects.get(id=ri(1,count))
+        question  = Question.objects.order_by('?').first()
+
 
         CustomUserRaiting = CustomUser.objects.get(custom_user=request.user)
 
@@ -94,8 +94,7 @@ class QuestionDetailView(View):
     def post(self,request):
 
         answer = request.POST.get('answer')
-        count = Question.objects.count()
-        question = Question.objects.get(id=ri(1, count))
+        question = Question.objects.order_by('?').first()
         CustomUserRaiting = CustomUser.objects.get(custom_user=request.user)
 
 
