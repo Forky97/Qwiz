@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Question
+from .models import Question,CustomUser
 
 
 
@@ -19,6 +19,7 @@ class QuestionModelTest(TestCase):
     def test_question_content(self):
         question = Question.objects.get(id=1)
         expected_question = f'Вопрос {question.id} про {question.question}'
+        print(question,expected_question)
         self.assertEqual(expected_question, str(question))
 
     def test_question_choices(self):
@@ -35,3 +36,12 @@ class QuestionModelTest(TestCase):
     def test_question_correct_answer(self):
         question = Question.objects.get(id=1)
         self.assertEqual(question.correct, '1')
+
+
+    def test_question_str(self):
+        question = Question.objects.get(id=1)
+        self.assertEqual(str(question), f'Вопрос {question.id} про {question.question}')
+
+    def test_custom_user_correct(self):
+        all_id = CustomUser.objects.get(id=1)
+        self.assertEqual(str(all_id),f'admin : 15')
