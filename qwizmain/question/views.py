@@ -169,7 +169,7 @@ class Top10(View):
 
 
 def Success(request):
-    'test2'
+    'test23'
     return render(request,'success.html')
 
 
