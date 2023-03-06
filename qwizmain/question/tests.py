@@ -2,6 +2,9 @@ from django.test import TestCase
 from .models import Question,CustomUser
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.serializers import serialize,deserialize
+import redis
+from .tasks import *
 
 
 
@@ -56,9 +59,9 @@ class QuestionModelTest(TestCase):
         question = Question.objects.get(id=1)
         self.assertEqual(str(question), f'Вопрос {question.id} про {question.question}')
 
-    # def test_custom_user_correct(self):
-    #     all_id = CustomUser.objects.get(id=1)
-    #     self.assertEqual(str(all_id),f'admin : 15')
+    def test_custom_user_correct(self):
+        all_id = CustomUser.objects.get(id=1)
+        self.assertEqual(str(all_id),f'dima : 0')
 
 
     def test_user_corect(self):
@@ -69,3 +72,9 @@ class QuestionModelTest(TestCase):
         custom_user = CustomUser.objects.get(id=1)
         self.assertEqual(custom_user.raiting,0)
 
+
+    def test_redis_connect(self):
+        with redis.Redis(host='localhost',port=6379,db=0) as red:
+            red.set('key',20)
+            new_value = red.incr('key')
+        self.assertEqual(new_value,21)
