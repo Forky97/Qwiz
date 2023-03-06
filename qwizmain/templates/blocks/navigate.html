@@ -19,6 +19,11 @@
           <li class="nav-item ">
             <a href="{% url 'contact' %}" class="nav-link">Контакты</a>
           </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item ">
+            <a href="{% url 'game' %}" class="nav-link">Игра</a>
+          </li>
+            {% endif %}
             <li class="nav-item ">
             <a href="http://127.0.0.1:8000/admin" class="nav-link">Админка</a>
           </li>

@@ -159,7 +159,6 @@ class Top10(View):
             top_users = red.get('top10')
 
             deserialized_obj = [d.object for d in deserialize('json', top_users)]
-            print(deserialized_obj)
 
             return render(request,'rating.html',context={'top_users': deserialized_obj})
 

@@ -27,6 +27,7 @@ def show_top10():
     '''получение топ 10 юзеров'''
     top_users = CustomUser.objects.order_by('-raiting')[:10]
     serialized_obj = serialize('json',top_users)
+
     with redis.Redis(host='redis',port=6379,db=0) as red:
         red.set('top10',serialized_obj)
         red.expire('mykey', 40)

@@ -8,7 +8,7 @@ from rest_framework import permissions
 
 class AddQuestionApi(APIView):
 
-    permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [permissions.IsAdminUser]
 
     def post(self,request):
 
