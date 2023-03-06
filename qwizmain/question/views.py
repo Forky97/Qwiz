@@ -9,8 +9,11 @@ from random import randint as ri
 from django.core.mail import send_mail
 from django.views.generic.base import RedirectView
 from django.urls import reverse
-from .tasks import send_mail_task
+from .tasks import send_mail_task,show_top10
 from django.http import HttpResponse
+import redis
+from django.core.serializers import deserialize
+
 
 
 
@@ -151,10 +154,14 @@ class ContactView(View):
 
 class Top10(View):
     def get(self,request):
-        top_users = CustomUser.objects.order_by('-raiting')[:10]
-        print(top_users)
 
-        return render(request,'rating.html',context={'top_users':top_users})
+        with redis.Redis(host='redis', port=6379, db=0) as red:
+            top_users = red.get('top10')
+
+            deserialized_obj = [d.object for d in deserialize('json', top_users)]
+            print(deserialized_obj)
+
+            return render(request,'rating.html',context={'top_users': deserialized_obj})
 
 
 
@@ -162,6 +169,7 @@ class Top10(View):
 
 
 def Success(request):
+    'test'
     return render(request,'success.html')
 
 

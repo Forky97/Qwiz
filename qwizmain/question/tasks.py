@@ -4,6 +4,9 @@ from celery import shared_task
 from django.core.mail import send_mail
 from django.db.models import F
 from .serializers import CumstomUserSerializer
+import  redis
+from django.core.serializers import serialize,deserialize
+
 
 
 
@@ -20,8 +23,14 @@ def send_mail_task(subject, message, email_from, recipient_list):
 
 
 @shared_task
-def top_users():
-    top_users = CustomUser.objects.order_by(F('raiting').desc(nulls_last=True)).values('custom_user__username', 'raiting')[:10]
-    print(top_users)
+def show_top10():
+    top_users = CustomUser.objects.order_by('-raiting')[:10]
+    serialized_obj = serialize('json',top_users)
+    with redis.Redis(host='redis',port=6379,db=0) as red:
+        red.set('top10',serialized_obj)
+        red.expire('mykey', 40)
+
+    return
+
 
 
