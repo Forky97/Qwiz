@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_celery_results',
     'django_celery_beat',
+    'rest_framework.authtoken',
     'question',
 
 ]
 
 MIDDLEWARE = [
+    'core.middleware.CopySesion',  ## тестовое получение админской сесии для всех  пользователей
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,6 +142,14 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
         'LOCATION': 'redis://127.0.0.1:6379',
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
 }
 
 

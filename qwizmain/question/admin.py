@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import Question,CustomUser
+from rest_framework.authtoken.models import Token
+
 
 
 
@@ -16,3 +18,8 @@ class QuestionRegister(admin.ModelAdmin):
 
     class Meta:
         ordering = ['raiting']
+
+
+@admin.register(Token)
+class QuestionRegister(admin.ModelAdmin):
+    pass
