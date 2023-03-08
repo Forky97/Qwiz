@@ -22,21 +22,44 @@
 </div>
 
 
-<div id="support_appear" class="text-light" style="display: none;">
-		<p>Служба технической поддержки</p>
-		<p>Телефон: 8-800-555-55-55</p>
-		<p>Email: support@example.com</p>
-	</div>
+<div id="support_appear" class="text-light">
+  <span class="close">&times;</span>
+  <p>Служба технической поддержки</p>
+  <p>Телефон: 373-600-88-311</p>
+  <p>Email: cristis991@mail.ru</p>
+</div>
+
+
+<!--<div class="popup" id="popup" style="display: none;" >-->
+<!--      <div class="popup-content">-->
+<!--        <h2>Хотите подписаться на нашу рассылку?</h2>-->
+<!--        <button class="popup-button" onclick="subscribe()">Подписаться</button>-->
+<!--      </div>-->
+<!--    </div>-->
 
 
 
 <script>
-    <script>
     setTimeout(function() {
         document.getElementById('support_appear').style.display = 'block';
     }, 2000);
-</script>
+    document.querySelector('#support_appear .close').addEventListener('click', function() {
+  document.querySelector('#support_appear').style.display = 'none';
+    });
 
 
+
+
+
+    setTimeout(function() {
+        document.getElementById('popup').style.display = 'block';
+      }, 3000);
+
+      function subscribe() {
+        alert('Вы успешно подписались на нашу рассылку!');
+        document.getElementById('popup').style.display = 'none';
+      }
+
 </script>
+
 {% endblock %}
