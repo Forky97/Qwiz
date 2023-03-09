@@ -42,12 +42,18 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'rest_framework.authtoken',
+    'corsheaders',
+    'djoser',
     'question',
 
 ]
 
+
+
+
 MIDDLEWARE = [
-    'core.middleware.CopySesion',  ## тестовое получение админской сесии для всех  пользователей
+    'corsheaders.middleware.CorsMiddleware',
+    # 'core.middleware.CopySesion',  ## тестовое получение админской сесии для всех  пользователей
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -150,6 +156,19 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
+}
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+
+
+STREAM_API_KEY = 'w946rja3x9m4'
+STREAM_API_SECRET = '5vvsnz9mewfzpfngwsy38mwsrjfuacqdxwufeyuyejh22aqc8xjrxtbccarynu2c'
+DJOSER = {
+    'SERIALIZERS': {
+        'token': 'auth.serializers.StreamTokenSerializer',
+    }
 }
 
 

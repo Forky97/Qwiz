@@ -26,6 +26,8 @@ urlpatterns = [
     path('',include('question.urls')),
     path('',include('question.urls_api')),
     path('api/',include('rest_framework.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + [
     path('api-token-auth/', views.obtain_auth_token)
