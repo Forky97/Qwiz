@@ -84,6 +84,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'qwizmain.wsgi.application'
+ASGI_APPLICATION = 'qwizmain.routing.application'
+
 
 
 # Database
