@@ -16,6 +16,6 @@ urlpatterns = [
     path('signout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='signout', ),
     path('game/top10',views.Top10.as_view(),name='top10'),
     path('chat/',views_websocket.ChatView.as_view(),name='chat'),
-    path("<str:room_name>/", views_websocket.RoomView.as_view(), name="room"),
+    path("chat/<str:room_name>/", views_websocket.RoomView.as_view(), name="room"),
 
 ]

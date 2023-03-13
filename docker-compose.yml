@@ -33,6 +33,7 @@ services:
       - redis
 
 
+
 #  celery_beat:
 #    build:
 #      context: .
