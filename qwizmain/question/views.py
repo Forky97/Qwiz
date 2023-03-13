@@ -163,13 +163,10 @@ class Top10(View):
             return render(request,'rating.html',context={'top_users': deserialized_obj})
 
 
-
-
-
-
 def Success(request):
 
     return render(request,'success.html')
+
 
 
 
