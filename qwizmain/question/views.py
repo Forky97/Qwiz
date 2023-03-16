@@ -154,13 +154,15 @@ class ContactView(View):
 
 class Top10(View):
     def get(self,request):
+        try:
+            with redis.Redis(host='localhost', port=6379, db=0) as red:
+                top_users = red.get('top10')
 
-        with redis.Redis(host='redis', port=6379, db=0) as red:
-            top_users = red.get('top10')
+                deserialized_obj = [d.object for d in deserialize('json', top_users)]
 
-            deserialized_obj = [d.object for d in deserialize('json', top_users)]
-
-            return render(request,'rating.html',context={'top_users': deserialized_obj})
+                return render(request,'rating.html',context={'top_users': deserialized_obj})
+        except:
+            return render(request,'home.html')
 
 
 def Success(request):

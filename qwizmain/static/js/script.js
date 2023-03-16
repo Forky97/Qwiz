@@ -1,18 +1,62 @@
-document.addEventListener("DOMContentLoaded",function(){
-
- let socket = new WebSocket("ws://localhost:12345");
-
- socket.onopen  = () => {
-
- console.log("client connected!");
- socket.send("hello!");
-
-
- };
-
-},false);
 
 
 
 
+/* скрипт для чата *//* скрипт для чата *//* скрипт для чата *//* скрипт для чата *//* скрипт для чата */
 
+
+  const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+        };
+
+
+
+
+
+
+
+
+/* скрипт для чата вход /* скрипт для чата вход /* скрипт для чата вход /* скрипт для чата вход /* скрипт для чата вход /* скрипт для чата вход */
+
+document.querySelector('#room-name-input').focus()
+    document.querySelector('#room-name-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#room-name-submit').click();
+        }
+    };
+
+    document.querySelector('#room-name-submit').onclick = function(e) {
+        var roomName = document.querySelector('#room-name-input').value;
+        window.location.pathname = '/chat/' + roomName + '/';
+    };

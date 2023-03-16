@@ -92,10 +92,15 @@ ASGI_APPLICATION = "qwizmain.asgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        "TEST": {
+            "NAME": BASE_DIR / "test",
+        },
     }
 }
 
@@ -185,7 +190,7 @@ DJOSER = {
 
 
 
-CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_BROKER_URL = 'redis://6379:6379/0'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_CACHE_BACKEND = 'default'
 
