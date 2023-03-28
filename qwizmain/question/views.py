@@ -80,6 +80,7 @@ class SignUpView(View):
 class QuestionDetailView(View):
 
     def get(self,request):
+
         message = 'Выберите пожалуйства правильный ответ '
 
         question  = Question.objects.order_by('?').first()

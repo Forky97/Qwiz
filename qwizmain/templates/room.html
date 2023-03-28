@@ -4,17 +4,91 @@
 
 {% block content %}}
 
+{% if user.is_authenticated %}
+
 <div id="cheat-room-center">
-    <h3>Чат</h3>
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <h3>Чат : вы зашли под юзера {{ user.username }}</h3>
+
+    <textarea id="chat-log" cols="100" rows="20" readonly></textarea><br>
     <input id="chat-message-input" type="text" size="100" placeholder="Ваше сообщение"><br>
     <input id="chat-message-submit" type="button" value="Отправить" >
+
 
 
     {{ room_name|json_script:"room-name" }}
 
         </div>
+{% else %}
 
+<h1 class="text-light">Войдите пожалуйста в систему для чата</h1>
+
+{% endif %}
+
+
+
+
+
+<script>
+
+
+    /* скрипт для чата *//* скрипт для чата *//* скрипт для чата *//* скрипт для чата *//* скрипт для чата */
+
+
+  const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+
+        // когда происходит ивент то поле чата работает как акумулятор и собирает все данные
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        // когда закрывается сокет то отправляется сообщение о закрытии
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        // ФОКус сразу на инпут , и при нажатии ентера срабатывает код 13 и отправляются данные
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+
+
+
+// То что отправляется в чат !!!!!!
+
+
+
+        const username = "{{user.username}}";
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const get_message = document.querySelector('#chat-message-input');
+
+            const message = get_message.value;
+
+
+            chatSocket.send(JSON.stringify({
+                'message': `${username}: ${message}`,
+            }));
+            get_message.value = '';
+        };
+
+
+
+
+</script>
 
 
 {% endblock %}

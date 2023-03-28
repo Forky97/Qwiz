@@ -5,6 +5,8 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
 <div id="chat-input-center">
 
     <h3 class = 'text-light'>В какую комнату вы желаете зайти для общения?</h3><br>
@@ -12,6 +14,12 @@
     <input id="room-name-submit" type="button" value="Enter">
 
 </div>
+
+{% else %}
+
+<h1 class="text-light" >Войдитие пожалуйста в систему для чата</h1>
+
+{% endif %}
 
 
 
