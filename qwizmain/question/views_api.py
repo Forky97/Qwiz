@@ -12,7 +12,7 @@ from rest_framework.authtoken.models import Token
 
 class AddQuestionApi(APIView):
 
-    permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [permissions.IsAdminUser]
 
     def post(self,request):
 
